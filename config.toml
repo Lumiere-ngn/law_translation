@@ -1,0 +1,13 @@
+url = "https://www.ontario.ca/laws/statute/90h08#BK229"
+parsed_cache_path = "out/rules_of_road.parsed.json"
+section_numbers = [161, 162, 163]
+model = "qwen3.5:9b"
+prompt_file = "src/law_translation/prompts/prompt.md"
+max_retries = 3
+ollama_request_timeout = 300
+debug_dir = "out/debug"
+output = "out/translation_res.json"
+
+# Use these only when needed.
+# input_html = "tests/fixtures/sample_part_x.html"
+# raw_cache_path = "out/rules_of_road.raw.html"

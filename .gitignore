@@ -1,0 +1,5 @@
+AGENTS.md
+tests/
+out/
+__pycache__/
+*.py[cod]

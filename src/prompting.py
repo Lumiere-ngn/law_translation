@@ -4,7 +4,10 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from law_translation.parser import LawSection
+try:
+    from .parser import LawSection
+except ImportError:
+    from parser import LawSection
 
 
 LAW_TEXT_PLACEHOLDER = "{{LAW_TEXT}}"

@@ -8,7 +8,10 @@ import json
 import re
 from typing import Any
 
-from law_translation.parser import LawSection
+try:
+    from .parser import LawSection
+except ImportError:
+    from parser import LawSection
 
 
 class TranslationValidationError(ValueError):

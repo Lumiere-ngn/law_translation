@@ -28,30 +28,29 @@ ollama list
 ├── pyproject.toml
 ├── README.md
 └── src/
-    └── law_translation/
-        ├── __init__.py
-        ├── cli.py
-        ├── ollama.py
-        ├── parser.py
-        ├── prompting.py
-        ├── prompts/
-        │   └── prompt.md
-        ├── retrieval.py
-        ├── translator.py
-        └── validation.py
+    ├── __init__.py
+    ├── cli.py
+    ├── ollama.py
+    ├── parser.py
+    ├── prompting.py
+    ├── prompts/
+    │   └── prompt.md
+    ├── retrieval.py
+    ├── translator.py
+    └── validation.py
 ```
 
 Key files:
 
 - `config.toml`: main runtime configuration.
-- `src/law_translation/cli.py`: command-line entrypoint.
-- `src/law_translation/retrieval.py`: retrieves Ontario law HTML/API content.
-- `src/law_translation/parser.py`: extracts Part X and splits it into sections.
-- `src/law_translation/prompting.py`: inserts each law section into the prompt template.
-- `src/law_translation/ollama.py`: calls `ollama run <model>`.
-- `src/law_translation/translator.py`: sends prompts, retries invalid JSON, and writes debug responses.
-- `src/law_translation/validation.py`: validates and normalizes model JSON.
-- `src/law_translation/prompts/prompt.md`: prompt template used for translation.
+- `src/cli.py`: command-line entrypoint.
+- `src/retrieval.py`: retrieves Ontario law HTML/API content.
+- `src/parser.py`: extracts Part X and splits it into sections.
+- `src/prompting.py`: inserts each law section into the prompt template.
+- `src/ollama.py`: calls `ollama run <model>`.
+- `src/translator.py`: sends prompts, retries invalid JSON, and writes debug responses.
+- `src/validation.py`: validates and normalizes model JSON.
+- `src/prompts/prompt.md`: prompt template used for translation.
 
 Generated files are written under `out/` by default.
 
@@ -64,7 +63,7 @@ url = "https://www.ontario.ca/laws/statute/90h08#BK229"
 parsed_cache_path = "out/rules_of_road.parsed.json"
 section_numbers = [161, 162, 163]
 model = "qwen3.5:9b"
-prompt_file = "src/law_translation/prompts/prompt.md"
+prompt_file = "src/prompts/prompt.md"
 max_retries = 3
 ollama_request_timeout = 300
 debug_dir = "out/debug"
@@ -100,7 +99,7 @@ input_html = "path/to/saved_page.html"
 From the repo root:
 
 ```bash
-PYTHONPATH=src python -m law_translation.cli --config config.toml
+PYTHONPATH=src python -m cli --config config.toml
 ```
 
 If the package is installed, use the console script:
@@ -112,13 +111,13 @@ law-translation --config config.toml
 CLI flags override config values. For example, to run the configured pipeline for one section:
 
 ```bash
-PYTHONPATH=src python -m law_translation.cli --config config.toml --section-number 148
+PYTHONPATH=src python -m cli --config config.toml --section-number 148
 ```
 
 To change the model for a run:
 
 ```bash
-PYTHONPATH=src python -m law_translation.cli --config config.toml --model qwen3.5:27b
+PYTHONPATH=src python -m cli --config config.toml --model qwen3.5:27b
 ```
 
 ## Output

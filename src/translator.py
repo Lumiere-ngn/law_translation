@@ -5,13 +5,22 @@ from __future__ import annotations
 from dataclasses import dataclass
 from pathlib import Path
 
-from law_translation.parser import LawSection
-from law_translation.prompting import render_prompt
-from law_translation.validation import (
-    TranslatedSection,
-    TranslationValidationError,
-    parse_translated_section,
-)
+try:
+    from .parser import LawSection
+    from .prompting import render_prompt
+    from .validation import (
+        TranslatedSection,
+        TranslationValidationError,
+        parse_translated_section,
+    )
+except ImportError:
+    from parser import LawSection
+    from prompting import render_prompt
+    from validation import (
+        TranslatedSection,
+        TranslationValidationError,
+        parse_translated_section,
+    )
 
 
 class TranslationError(RuntimeError):

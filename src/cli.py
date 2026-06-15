@@ -10,11 +10,18 @@ import sys
 import tomllib
 from typing import Any
 
-from law_translation.ollama import OllamaError, OllamaRunner
-from law_translation.parser import LawPart, LawSection, ParseError, parse_rules_of_road
-from law_translation.prompting import PromptTemplateError, load_prompt_template
-from law_translation.retrieval import DEFAULT_URL, RetrievalError, load_html, retrieve_html
-from law_translation.translator import TranslationError, translate_sections
+try:
+    from .ollama import OllamaError, OllamaRunner
+    from .parser import LawPart, LawSection, ParseError, parse_rules_of_road
+    from .prompting import PromptTemplateError, load_prompt_template
+    from .retrieval import DEFAULT_URL, RetrievalError, load_html, retrieve_html
+    from .translator import TranslationError, translate_sections
+except ImportError:
+    from ollama import OllamaError, OllamaRunner
+    from parser import LawPart, LawSection, ParseError, parse_rules_of_road
+    from prompting import PromptTemplateError, load_prompt_template
+    from retrieval import DEFAULT_URL, RetrievalError, load_html, retrieve_html
+    from translator import TranslationError, translate_sections
 
 
 class ConfigError(ValueError):
